@@ -1,0 +1,40 @@
+
+  //show users
+  def users = Action { request =>
+    Ok(views.html.users(
+      userList
+        .groupBy(u => u.lastName.head) //group by first letter of the lastName
+        .map { case (letter, list) =>
+          //sorted by lastName | chunked by 10
+          (letter, list.sortBy(_.lastName).sliding(10, 10).toList)
+        }
+    ))
+  }
+
+
+
+  //user
+  def user(id:String) = Action {
+    userList.find(_.id == id) match {
+      case None => NotFound("user not found")
+      case Some(user) => Ok(views.html.showUser(user))
+    }
+  }
+
+
+
+  //get user by first name
+  def byFirstName = Action { request =>
+    val user:Option[User] = for {
+      firstNames  <- request.queryString.get("firstname")
+      firstName   <- firstNames.headOption
+      user        <- userList.filter(_.firstName == firstName).headOption
+      //user        <- userList.find(_.firstName == firstName) <== BETTER!
+    } yield user
+
+    user match {
+      case None => NotFound("user not found")
+      case Some(user) => Ok(views.html.showUser(user))
+    }
+
+  }

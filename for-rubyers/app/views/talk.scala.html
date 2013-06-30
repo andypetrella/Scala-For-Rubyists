@@ -1,0 +1,20 @@
+@()
+
+@main("FF to FP") {
+
+  <span id="click">GO!</span>
+  <div id="content">
+    <h2 id="title"></h2>
+    <ul id="result"></ul>
+  </div>
+
+  <script src="@routes.Assets.at("javascripts/talk.js")"></script>
+  <script>
+
+    $(function() {
+      var talk = new Talk($("#content"), "@routes.Talk.stress")
+      talk.activate($("#click"))
+    });
+
+  </script>
+}

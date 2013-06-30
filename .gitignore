@@ -1,0 +1,5 @@
+scala/target
+scala/project
+node_modules
+ff-to-fp/target
+ff-to-fp/project/target

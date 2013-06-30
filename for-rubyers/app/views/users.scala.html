@@ -1,0 +1,19 @@
+@(users: Map[Char, List[List[Application.User]]])
+
+@main("Show users") {
+
+  @users.map{ case (letter, userLists) =>
+    <h2>@letter.toUpperCase</h2>
+    <div>
+      @userLists.map{ users =>
+        <ul style="float:left">
+          @users.map { user =>
+            <li><a href="@routes.Application.user(user.id)">@user.lastName (@user.firstName)</a></li>
+          }
+        </ul>
+      }
+    </div>
+    <div style="clear:both"></div>
+  }
+
+}

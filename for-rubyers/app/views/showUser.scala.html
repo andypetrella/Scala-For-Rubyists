@@ -1,0 +1,12 @@
+@(user: Application.User)
+
+@main("Show user") {
+  <h1>@user.firstName @user.lastName (@user.age)</h1>
+  <h4>Find</h4>
+  <ul>
+    <li><a href="@routes.Application.byFirstName?firstname=@user.firstName">this one!</a></li>
+    <li><a href="@routes.Application.byFirstName?firstname=">no value</a></li>
+    <li><a href="@routes.Application.byFirstName?firstname=123">bad value</a></li>
+    <li><a href="@routes.Application.byFirstName">no parameter</a></li>
+  </h4>
+}
