@@ -2,77 +2,22 @@ package be.wajug
 
 object talk extends App {
 
-  val argsList:List[String] = args.toList
+  //Structures
+  case class User(first:String, last:String, age:Int, gender:Gender)
+  sealed trait Gender
+  case object Male extends Gender
+  case object Female extends Gender
 
-  argsList foreach println
+  val noootsab = User("andy", "petrella", 31, Male)
+  val sandrine = noootsab.copy(first="sandrine", gender=Female)
+  val noah = noootsab.copy(first="noah", age=3)
 
-  val lengthsList = argsList map (x => x.length)
-  lengthsList foreach println
-
-  val l = lengthsList.sum
-  println(l)
-
-  //def append(del:String)(x:String, y:String) = x + del + y
-  //val a : String => (String, String) => String = del => (x, y) => x + del + y
-
-  val aL = argsList reduce ((x,y) => x + " " + y)
-  println(aL)
-
-
-  println(argsList mkString " ")
-
-  case class Dev(firstName:String, lastName:String, languages:Set[Language])
-
-  //class Language(val name:String)
-  trait Language {
-    def name: String
-    //def paradigms:Set[Paradigm]
-  }
-  case object Scala extends Language with Functional with OO {
-    val name = "Scala"
-    //val paradigms = Set(Functional, OO)
-
-    override def toString:String = name + " is Functional and OO"
-  }
-  case object Java extends Language with OO {
-    val name = "Java"
-    //val paradigms = Set(OO)
-  }
-  case object CoffeeScript extends Language with Prototypal with OO {
-    val name = "CoffeeScript"
-    //val paradigms = Set(Prototypal, OO)
-  }
-
-  case object Haskell extends Language with Functional {
-    val name = "Haskell"
-  }
-
-  trait Paradigm {
-    //def rules:Set[String]
-  }
-  trait Functional extends Paradigm {
-    //def ....
-  }
-  trait OO extends Paradigm {
-    // ...
-  }
-  trait Prototypal extends Paradigm {
-    // ...
-  }
+  val petrellas = Seq(noah, sandrine, noootsab)
+  val ordered = petrellas
+                  .sortBy(_.first)
+                  .map{p => p.copy(first=p.first.head.toString.toUpperCase+p.first.tail)}
 
 
 
-  val noootsab = /*new*/ Dev("andy", "petrella", Set(Scala, Java, CoffeeScript))
-
-  println(noootsab)
-
-  val beefedUpNoootsab = noootsab.copy(languages = noootsab.languages + Haskell)
-
-  println(beefedUpNoootsab)
-
-  //good for concurrency ... the shared resource problem is not a problem but not resolved as well... akka
-
-
-
-
+  //Composable Behaviors
 }
