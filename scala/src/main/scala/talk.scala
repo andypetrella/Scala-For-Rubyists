@@ -20,4 +20,57 @@ object talk extends App {
 
 
   //Composable Behaviors
+  //very simple IO monad
+  // >> hardly inspired by this great talk (http://www.youtube.com/watch?v=1gZAqJA2pEk) given by Paul Chiusano
+
+  trait Action[+A] { self =>
+    def run:A
+    def map[B](f:A=>B) = new Action[B] {
+      def run = f(self.run)
+    }
+    def flatMap[B](f:A=>Action[B]):Action[B] = new Action[B] {
+      def run = f(self.run).run
+    }
+  }
+
+  object Action {
+    def PrintLn(msg:String) = new Action[Unit] {
+      def run = println(msg)
+    }
+    def ReadLine = new Action[String] {
+      def run = readLine
+    }
+    def ReadLines(f:String) = new Action[List[String]] {
+      def run = {
+        val s = scala.io.Source.fromURL(f)
+        val l = s.getLines().toList
+        s.close()
+        l
+      }
+    }
+  }
+
+  import Action._
+  def echo = for {
+    _ <- PrintLn("Enter an echo message")
+    s <- ReadLine
+    _ <- PrintLn(s)
+  } yield ()
+
+  echo.run
+
+  def printlnInc = for {
+    _ <- PrintLn("fetching ints")
+    l <- ReadLines(talk.getClass.getResource("/ints.txt").toURI.toString)
+    _ <- PrintLn(l.mkString(" -- "))
+    _ <- PrintLn("adding 1")
+    _ <- PrintLn(l.map(_.toInt + 1).mkString("\n"))
+  } yield ()
+
+  printlnInc.run
+
+
+  // Facets
+
+
 }
