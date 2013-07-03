@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>ff to fp</title>
+    <title>Scala for Rubyists</title>
 
     <meta name="description" content="A gentle int to Scala for Rubyists">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -40,7 +40,7 @@
             <h2>Scala has Rubyicity</h2>
             <div>Object Oriented in Nature</div>
             <div>Functional Programming in Heart</div>
-            <div>It is expressive</div>
+            <div>Expressive</div>
           </section>
           <section>
             <h2>Object Oriented in Nature</h2>
@@ -48,7 +48,10 @@
               Every thing is an object... 
             </p>
             <p>
-              Polymorphism is, of course, encouraged. But several options are possible.
+              Polymorphism is, of course, encouraged.
+            </p>
+            <p>
+              But several options are possible.
             </p>
           </section>
           <section>
@@ -57,10 +60,10 @@
               Every thing can be a function (λ-calculus).
             </p>
             <p>
-              It's also possible, but not mandatory. 
+              Possible, but not mandatory. 
             </p>
             <p>
-              However, immutability is more than encouraged!
+              OTOH, immutability is more than encouraged!
             </p>
           </section>
           <section>
@@ -81,37 +84,53 @@
           </section>
           <section>
             <h2><strong>Strongly</strong> typed</h2>
-            <p>Strongly types must mean that it possible to do something relevant using them</p>
+            <p>Strongly types means: </p>
+            <p><em>allowing interesting stuffs with type</em></p>
             <p>So Scala does...</p>
             <p>It's not Java, neither C++</p>
+          </section>
+          <section>
             <p>A type can describe </p>
-            <ul>
-              <li>Immutable structures</li>
-              <li>Composable Behaviors</li>
-              <li><em>Facets</em></li>
-              <li>and other advanced stuffs (Type Level programming)</li>
+            <ul style="list-style: square">
+            <li>Immutable structures</li>
+            <li>Composable Behaviors</li>
+            <li><em>Facets</em></li>
+            <li>... and even more</li>
             </ul>
           </section>
           <section>
             <h2>Immutable Structure</h2>
-            <p>Case class is immutable at its level</p>
-            <p>So copy is generated for us</p>
+            <p>`case class` creates immutable objects</p>
+            <p>Based on the type, the compiler generates `copy`</p>
           </section>
           <section>
             <h2>Composable Behaviors</h2>
             <p>Describe what you want to do ...</p>
-            <p>... and choose how to execute it</p>
+            <p>... and choose how/when to execute it</p>
+          </section>          
+          <section>
+            <h2>Facets</h2>
+            <p>Some functionnalities can be dependent of the context</p>
+            <p>The code can <strong>adapt</strong> to the context</p>
+            <p>Old code is not touched: <strong>Horizontal extension</strong></p>
           </section>
         </section>
         <section>
           <section>
             <h2>Lazy to save the work</h2>
             <div>By-name parameter: avoid computing</div>
-            <div>Future: avoid blocking</div>
+            <div>Future: compose without blocking</div>
           </section>
           <section>
-            <h2></h2>
-            <p></p>
+            <h2>By-name parameter: avoid computing</h2>
+            <p>Pass a by-name parameter to a function...</p>
+            <p>... its evaluation will be delayed at its first access</p>
+          </section>
+          <section>
+            <h2>Future: compose without blocking</h2>
+            <p>Declare a computation...</p>
+            <p>Doens't wait for the result</p>
+            <p>But react on it...</p>
           </section>
         </section>
         <section>
@@ -121,8 +140,11 @@
             <div>Without screwing them</div>
           </section>
           <section>
-            <h2></h2>
-            <p></p>
+            <h2>Add methods to existing types</h2>
+            <p>Classes can be <em>pimped</em> with new methods...</p>
+            <p>... contextually</p>
+            <p>It's up to the dev's choice!</p>
+            <p><small>Do it as less often as possible...</small></p>
           </section>
         </section>
         <section>
